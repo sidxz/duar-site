@@ -230,14 +230,11 @@ export default function Home() {
     <div className="flex flex-col">
       {/* Hero */}
       <section className="mx-auto w-full max-w-6xl px-6 pt-20 pb-8">
-        <p className="label-mono text-[11px] text-muted-foreground">
-          <span className="text-brand">Open source</span> · Self-hosted · Bring your own IdP
-        </p>
-        <h1 className="mt-6 max-w-3xl text-5xl font-medium leading-[1.02] tracking-tight text-ink sm:text-6xl lg:text-[76px]">
+        <h1 className="max-w-3xl text-5xl font-medium leading-[1.02] tracking-tight text-ink sm:text-6xl lg:text-[76px]">
           Authorization for everything after login.
         </h1>
-        <p className="mt-5 label-mono text-[11px] text-muted-foreground">
-          <span className="text-ink">Duar</span> — Doorway for Users, Actions, and Resources
+        <p className="mt-5 text-base text-muted-foreground">
+          <span className="font-medium text-ink">Duar</span> — Doorway for Users, Actions, and Resources.
         </p>
         <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">
           Keep Sign in with Google, GitHub, or Entra ID exactly as it is.{" "}
