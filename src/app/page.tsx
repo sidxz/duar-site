@@ -32,12 +32,6 @@ const steps = [
   },
 ];
 
-const stats = [
-  { value: "3", label: "Authorization tiers, coarse to per-resource" },
-  { value: "4", label: "SDKs — Python, JS, React, Next.js" },
-  { value: "0", label: "Passwords stored. Ever." },
-];
-
 const capabilities = [
   {
     title: "Bring your own IdP",
@@ -229,7 +223,7 @@ export default function Home() {
   return (
     <div className="flex flex-col">
       {/* Hero */}
-      <section className="mx-auto w-full max-w-6xl px-6 pt-20 pb-8">
+      <section className="mx-auto w-full max-w-6xl px-6 pt-20 pb-12">
         <h1 className="max-w-3xl text-5xl font-medium leading-[1.02] tracking-tight text-ink sm:text-6xl lg:text-[76px]">
           Authorization for everything after login.
         </h1>
@@ -267,23 +261,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Stats */}
-      <section className="mx-auto w-full max-w-6xl px-6 py-16">
-        <div className="grid gap-8 border-y border-border py-12 sm:grid-cols-3">
-          {stats.map((s) => (
-            <div key={s.label}>
-              <div className="text-6xl font-medium tracking-tight text-brand">{s.value}</div>
-              <p className="mt-3 label-mono text-[11px] text-muted-foreground">{s.label}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
       {/* Capabilities */}
       <section id="features" className="mx-auto w-full max-w-6xl scroll-mt-20 px-6 py-16">
-        <p className="label-mono text-[11px] text-muted-foreground">/ How it works</p>
-        <h2 className="mt-4 max-w-2xl text-4xl font-medium tracking-tight text-ink sm:text-5xl">
-          Everything your IdP doesn&apos;t do.
+        <h2 className="max-w-2xl text-4xl font-medium tracking-tight text-ink sm:text-5xl">
+          Control who can do what.
         </h2>
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {capabilities.map((c) => (
@@ -311,8 +292,7 @@ export default function Home() {
         <div className="grid gap-12 lg:grid-cols-[1.05fr_1fr] lg:items-center">
           <TierStack className="mx-auto h-auto w-full max-w-md lg:max-w-none" />
           <div className="min-w-0">
-            <p className="label-mono text-[11px] text-muted-foreground">/ Users · Actions · Resources — three tiers, one dependency</p>
-            <h2 className="mt-4 text-4xl font-medium tracking-tight text-ink sm:text-5xl">
+            <h2 className="text-4xl font-medium tracking-tight text-ink sm:text-5xl">
               Coarse to fine, without leaving the request.
             </h2>
             <p className="mt-5 leading-relaxed text-muted-foreground">
@@ -327,8 +307,7 @@ export default function Home() {
 
       {/* SDKs */}
       <section className="mx-auto w-full max-w-6xl px-6 py-16">
-        <p className="label-mono text-[11px] text-muted-foreground">/ Ship it in your stack</p>
-        <h2 className="mt-4 max-w-2xl text-4xl font-medium tracking-tight text-ink sm:text-5xl">
+        <h2 className="max-w-2xl text-4xl font-medium tracking-tight text-ink sm:text-5xl">
           Three lines to a protected route.
         </h2>
         <div className="mt-12 grid gap-5 lg:grid-cols-3">
@@ -351,8 +330,7 @@ export default function Home() {
       {/* Problems */}
       <section className="border-y border-border bg-wash/60">
         <div className="mx-auto w-full max-w-6xl px-6 py-20">
-          <p className="label-mono text-[11px] text-muted-foreground">/ What you stop building</p>
-          <h2 className="mt-4 max-w-2xl text-4xl font-medium tracking-tight text-ink sm:text-5xl">
+          <h2 className="max-w-2xl text-4xl font-medium tracking-tight text-ink sm:text-5xl">
             Six things every app re-implements. Solved once.
           </h2>
           <ol className="mt-14 grid gap-x-12 gap-y-10 sm:grid-cols-2">
@@ -376,8 +354,7 @@ export default function Home() {
       <section className="mx-auto w-full max-w-6xl px-6 py-20">
         <div className="grid gap-12 lg:grid-cols-[1fr_1.2fr] lg:items-center">
           <div>
-            <p className="label-mono text-[11px] text-muted-foreground">/ Admin panel</p>
-            <h2 className="mt-4 text-4xl font-medium tracking-tight text-ink sm:text-5xl">
+            <h2 className="text-4xl font-medium tracking-tight text-ink sm:text-5xl">
               See everything from one place.
             </h2>
             <p className="mt-5 leading-relaxed text-muted-foreground">
@@ -405,8 +382,7 @@ export default function Home() {
       {/* Security */}
       <section className="mx-auto w-full max-w-6xl px-6 pb-20">
         <div className="rounded-2xl border border-border bg-paper p-8 sm:p-12">
-          <p className="label-mono text-[11px] text-muted-foreground">/ Built to be audited</p>
-          <h2 className="mt-4 max-w-2xl text-3xl font-medium tracking-tight text-ink sm:text-4xl">
+          <h2 className="max-w-2xl text-3xl font-medium tracking-tight text-ink sm:text-4xl">
             Boring where it counts.
           </h2>
           <ul className="mt-8 grid gap-x-12 gap-y-3 sm:grid-cols-2">
@@ -428,8 +404,7 @@ export default function Home() {
       <section className="mx-auto w-full max-w-6xl px-6 py-20">
         <div className="grid gap-12 lg:grid-cols-[1.05fr_1fr] lg:items-center">
           <div>
-            <p className="label-mono text-[11px] text-muted-foreground">/ Under the hood</p>
-            <h2 className="mt-4 text-4xl font-medium tracking-tight text-ink sm:text-5xl">
+            <h2 className="text-4xl font-medium tracking-tight text-ink sm:text-5xl">
               Built on proven infrastructure.
             </h2>
             <p className="mt-5 leading-relaxed text-muted-foreground">
