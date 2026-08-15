@@ -80,6 +80,114 @@ const tiersCode: CodeLine[] = [
   "        raise HTTPException(403)",
 ];
 
+const sdkCards: { title: string; install: string; lines: CodeLine[] }[] = [
+  {
+    title: "FastAPI",
+    install: "pip install sentinel-auth-sdk",
+    lines: [
+      "from fastapi import Depends, FastAPI",
+      "from sentinel_auth import Sentinel",
+      "",
+      "sentinel = Sentinel(",
+      '    base_url="https://auth.example.com",',
+      '    service_name="my-app",',
+      '    service_key="sk_...",',
+      '    mode="authz",',
+      '    idp_jwks_url="https://www.googleapis.com/oauth2/v3/certs",',
+      ")",
+      "",
+      "app = FastAPI(lifespan=sentinel.lifespan)",
+      { t: "sentinel.protect(app)", k: "brand" },
+      "",
+      '@app.get("/projects")',
+      "async def list_projects(user=Depends(sentinel.require_user)):",
+      "    return await get_projects(user.workspace_id)",
+    ],
+  },
+  {
+    title: "React",
+    install: "npm i @sentinel-auth/react",
+    lines: [
+      'import { IdpConfigs } from "@sentinel-auth/js";',
+      'import { AuthzProvider, AuthzGuard, useAuthz } from "@sentinel-auth/react";',
+      "",
+      "export function App() {",
+      "  return (",
+      "    <AuthzProvider config={{",
+      '      sentinelUrl: "https://auth.example.com",',
+      '      mintEndpoint: "/api/auth/mint",',
+      "      idps: { google: IdpConfigs.google(GOOGLE_CLIENT_ID) },",
+      "    }}>",
+      { t: "      <AuthzGuard fallback={<Login />}>", k: "brand" },
+      "        <Dashboard />",
+      "      </AuthzGuard>",
+      "    </AuthzProvider>",
+      "  );",
+      "}",
+      "",
+      "function Login() {",
+      "  const { login } = useAuthz();",
+      '  return <button onClick={() => login("google")}>Sign in</button>;',
+      "}",
+    ],
+  },
+  {
+    title: "Next.js",
+    install: "npm i @sentinel-auth/nextjs",
+    lines: [
+      { t: "// middleware.ts", k: "muted" },
+      'import { createSentinelAuthzMiddleware } from "@sentinel-auth/nextjs/authz-middleware";',
+      "",
+      { t: "export default createSentinelAuthzMiddleware({", k: "brand" },
+      "  sentinelUrl: process.env.SENTINEL_URL!,",
+      '  idpJwksUrl: "https://www.googleapis.com/oauth2/v3/certs",',
+      "  idpAudience: process.env.GOOGLE_CLIENT_ID!,",
+      '  idpIssuer: "https://accounts.google.com",',
+      '  serviceName: "team-notes",',
+      '  publicPaths: ["/login", "/auth/callback"],',
+      '  loginPath: "/login",',
+      "});",
+      "",
+      "export const config = {",
+      '  matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],',
+      "};",
+    ],
+  },
+];
+
+const problems = [
+  {
+    title: "JWT validation, per service",
+    pain: "JWKS fetch, audience, clock skew, key rotation — re-implemented in every backend.",
+    fix: "The SDK does it: RS256, kid rotation, /.well-known/jwks.json.",
+  },
+  {
+    title: "A roles table in every app",
+    pain: "RBAC drifts across services; nobody knows who can export what.",
+    fix: "Namespaced actions and workspace-scoped roles in one place; require_action.",
+  },
+  {
+    title: "Ad-hoc sharing logic",
+    pain: "“Can Alice edit doc 42?” becomes columns and joins.",
+    fix: "Zanzibar-style entity ACLs; can() and accessible().",
+  },
+  {
+    title: "Tenant isolation by convention",
+    pain: "The workspace_id filter someone forgets.",
+    fix: "Workspace-scoped claims; roles and grants can't cross tenants.",
+  },
+  {
+    title: "Token hygiene as an afterthought",
+    pain: "Rotation, reuse detection, and revocation bolted on late.",
+    fix: "Refresh rotation, reuse detection, Redis denylist, jti — built in.",
+  },
+  {
+    title: "No admin UI",
+    pain: "Auth state lives in SQL consoles and Slack threads.",
+    fix: "React admin: users, workspaces, roles, grants, service apps, activity, usage.",
+  },
+];
+
 export default function Home() {
   return (
     <div className="flex flex-col">
@@ -177,6 +285,53 @@ export default function Home() {
             </p>
             <CodeCard title="FastAPI" lines={tiersCode} className="mt-8" />
           </div>
+        </div>
+      </section>
+
+      {/* SDKs */}
+      <section className="mx-auto w-full max-w-6xl px-6 py-16">
+        <p className="label-mono text-[11px] text-muted-foreground">/ Ship it in your stack</p>
+        <h2 className="mt-4 max-w-2xl text-4xl font-medium tracking-tight text-ink sm:text-5xl">
+          Three lines to a protected route.
+        </h2>
+        <div className="mt-12 grid gap-5 lg:grid-cols-3">
+          {sdkCards.map((c) => (
+            <CodeCard key={c.title} title={c.title} install={c.install} lines={c.lines} />
+          ))}
+        </div>
+        <p className="mt-6 text-sm text-muted-foreground">
+          Full guides:{" "}
+          <a href={links.sdkPython} className="text-ink underline-offset-4 hover:underline">Python SDK</a>
+          {" · "}
+          <a href={links.sdkJs} className="text-ink underline-offset-4 hover:underline">JS/TS SDK</a>
+          {" · "}
+          <a href={links.tutorialReact} className="text-ink underline-offset-4 hover:underline">React + FastAPI tutorial</a>
+          {" · "}
+          <a href={links.tutorialNext} className="text-ink underline-offset-4 hover:underline">Next.js tutorial</a>
+        </p>
+      </section>
+
+      {/* Problems */}
+      <section className="border-y border-border bg-wash/60">
+        <div className="mx-auto w-full max-w-6xl px-6 py-20">
+          <p className="label-mono text-[11px] text-muted-foreground">/ What you stop building</p>
+          <h2 className="mt-4 max-w-2xl text-4xl font-medium tracking-tight text-ink sm:text-5xl">
+            Six things every app re-implements. Solved once.
+          </h2>
+          <ol className="mt-14 grid gap-x-12 gap-y-10 sm:grid-cols-2">
+            {problems.map((p, i) => (
+              <li key={p.title} className="flex gap-5">
+                <span className="label-mono shrink-0 text-[11px] text-muted-foreground">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <div className="border-t border-ink/15 pt-1">
+                  <h3 className="text-lg font-medium text-ink">{p.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.pain}</p>
+                  <p className="mt-1 text-sm leading-relaxed text-ink">{p.fix}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
         </div>
       </section>
 
