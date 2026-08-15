@@ -233,7 +233,7 @@ export default function Home() {
           <span className="text-brand">Open source</span> · Self-hosted · Bring your own IdP
         </p>
         <h1 className="mt-6 max-w-3xl text-5xl font-medium leading-[1.02] tracking-tight text-ink sm:text-6xl lg:text-[76px]">
-          Auth for everything after login.
+          Authorization for everything after login.
         </h1>
         <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
           Keep Sign in with Google, GitHub, or Entra ID exactly as it is.{" "}

@@ -26,7 +26,7 @@ const SITE_URL =
 
 export const metadata: Metadata = {
   title: {
-    default: "Sentinel Auth — Auth for everything after login",
+    default: "Sentinel Auth — Authorization for everything after login",
     template: "%s | Sentinel Auth",
   },
   description:
