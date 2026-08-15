@@ -14,7 +14,7 @@ This version has breaking changes — read the relevant guide in `node_modules/n
 - **Buttons:** `rounded-none`, mono uppercase; `src/lib/cta.ts`. Cards `rounded-2xl`. Container `max-w-6xl px-6`. Eyebrows `/ Label`.
 - **Tokens:** `src/app/globals.css`. Links: `src/lib/links.ts`. Static assets: always `asset("/path")` (basePath).
 - **Logo:** the real brand mark `public/logo.png` (black shield, yellow hexagon; transparent) via `Logo` in `src/components/layout/logo.tsx`; favicon `src/app/icon.png`. Source PSD/PNG: `~/workspace/logos/duar/`.
-- **Art** is hand-authored SVG in `src/components/marketing/`. No other rasters except user-provided admin screenshots in `public/screenshots/` (via `ScreenshotFrame src=`).
+- **Art** is hand-authored SVG in `src/components/marketing/`. No other rasters.
 - **Motion:** only `tier-stack.tsx` (IntersectionObserver explode; reduced-motion → static SSR state).
 
 ## Verify (do this before claiming anything looks right)

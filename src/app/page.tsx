@@ -6,7 +6,6 @@ import { TokenFlow } from "@/components/marketing/token-flow";
 import { IdpDemo, WorkspaceDemo, TiersDemo, ServiceDemo } from "@/components/marketing/capability-demos";
 import { TierStack } from "@/components/marketing/tier-stack";
 import { CodeCard, type CodeLine } from "@/components/marketing/code-card";
-import { ScreenshotFrame } from "@/components/marketing/screenshot-frame";
 import { Topology } from "@/components/marketing/topology";
 
 const steps = [
@@ -352,7 +351,7 @@ export default function Home() {
 
       {/* Admin panel */}
       <section className="mx-auto w-full max-w-6xl px-6 py-20">
-        <div className="grid gap-12 lg:grid-cols-[1fr_1.2fr] lg:items-center">
+        <div className="grid gap-12 lg:grid-cols-[1.2fr_1fr] lg:items-start">
           <div>
             <h2 className="text-4xl font-medium tracking-tight text-ink sm:text-5xl">
               See everything from one place.
@@ -362,20 +361,19 @@ export default function Home() {
               grant, and service key is one click away — with the activity
               trail to explain how it got there.
             </p>
-            <ul className="mt-8 space-y-3">
-              {adminAreas.map((a) => (
-                <li key={a} className="flex items-center gap-3 text-sm text-ink">
-                  <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-ink" />
-                  {a}
-                </li>
-              ))}
-            </ul>
             <a href={links.guide("admin-panel")} className="mt-8 inline-flex items-center gap-1.5 label-mono text-[11px] text-ink">
               Admin panel guide
               <ArrowRight className="h-3.5 w-3.5" />
             </a>
           </div>
-          <ScreenshotFrame alt="Duar admin dashboard" label="Screenshot — admin dashboard" />
+          <ul className="divide-y divide-border border-y border-border lg:mt-3">
+            {adminAreas.map((a) => (
+              <li key={a} className="flex items-center gap-3 py-3.5 text-sm text-ink">
+                <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-ink" />
+                {a}
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
