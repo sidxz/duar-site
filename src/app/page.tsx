@@ -1,10 +1,11 @@
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Check } from "lucide-react";
 import { ctaPrimary, ctaOutline } from "@/lib/cta";
 import { links } from "@/lib/links";
 import { TokenFlow } from "@/components/marketing/token-flow";
 import { IdpDemo, WorkspaceDemo, TiersDemo, ServiceDemo } from "@/components/marketing/capability-demos";
 import { TierStack } from "@/components/marketing/tier-stack";
 import { CodeCard, type CodeLine } from "@/components/marketing/code-card";
+import { ScreenshotFrame } from "@/components/marketing/screenshot-frame";
 
 const steps = [
   {
@@ -188,6 +189,25 @@ const problems = [
   },
 ];
 
+const adminAreas = [
+  "Users and workspaces",
+  "Roles, actions, and grants",
+  "Permissions (entity ACLs)",
+  "Service apps and realms",
+  "Activity, insights, usage",
+];
+
+const security = [
+  "RS256 JWTs with kid rotation",
+  "Refresh rotation with reuse detection",
+  "Redis denylist for revocation",
+  "IdP token never persisted",
+  "Service keys 256-bit, DB-managed",
+  "Rate limiting, CORS, HSTS, CSP, trusted hosts",
+  "Audit and activity trail",
+  "Trivy dependency and container scans in CI",
+];
+
 export default function Home() {
   return (
     <div className="flex flex-col">
@@ -332,6 +352,58 @@ export default function Home() {
               </li>
             ))}
           </ol>
+        </div>
+      </section>
+
+      {/* Admin panel */}
+      <section className="mx-auto w-full max-w-6xl px-6 py-20">
+        <div className="grid gap-12 lg:grid-cols-[1fr_1.2fr] lg:items-center">
+          <div>
+            <p className="label-mono text-[11px] text-muted-foreground">/ Admin panel</p>
+            <h2 className="mt-4 text-4xl font-medium tracking-tight text-ink sm:text-5xl">
+              See everything from one place.
+            </h2>
+            <p className="mt-5 leading-relaxed text-muted-foreground">
+              A React admin ships with the service. Every workspace, role,
+              grant, and service key is one click away — with the activity
+              trail to explain how it got there.
+            </p>
+            <ul className="mt-8 space-y-3">
+              {adminAreas.map((a) => (
+                <li key={a} className="flex items-center gap-3 text-sm text-ink">
+                  <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-ink" />
+                  {a}
+                </li>
+              ))}
+            </ul>
+            <a href={links.guide("admin-panel")} className="mt-8 inline-flex items-center gap-1.5 label-mono text-[11px] text-ink">
+              Admin panel guide
+              <ArrowRight className="h-3.5 w-3.5" />
+            </a>
+          </div>
+          <ScreenshotFrame alt="Sentinel admin dashboard" label="Screenshot — admin dashboard" />
+        </div>
+      </section>
+
+      {/* Security */}
+      <section className="mx-auto w-full max-w-6xl px-6 pb-20">
+        <div className="rounded-2xl border border-border bg-paper p-8 sm:p-12">
+          <p className="label-mono text-[11px] text-muted-foreground">/ Built to be audited</p>
+          <h2 className="mt-4 max-w-2xl text-3xl font-medium tracking-tight text-ink sm:text-4xl">
+            Boring where it counts.
+          </h2>
+          <ul className="mt-8 grid gap-x-12 gap-y-3 sm:grid-cols-2">
+            {security.map((s) => (
+              <li key={s} className="flex items-start gap-3 text-sm text-ink">
+                <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
+                {s}
+              </li>
+            ))}
+          </ul>
+          <a href={links.security} className="mt-8 inline-flex items-center gap-1.5 label-mono text-[11px] text-ink">
+            Security overview
+            <ArrowRight className="h-3.5 w-3.5" />
+          </a>
         </div>
       </section>
 
