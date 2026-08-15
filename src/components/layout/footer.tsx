@@ -72,6 +72,10 @@ export function Footer() {
           </p>
           <p className="label-mono text-[10px] text-muted-foreground">MIT License</p>
         </div>
+        <p className="mt-4 max-w-2xl text-xs leading-relaxed text-muted-foreground">
+          Sentinel Auth is an independent open-source project and is not
+          affiliated with Microsoft or other Sentinel-branded products.
+        </p>
       </div>
     </footer>
   );

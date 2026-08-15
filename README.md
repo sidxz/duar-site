@@ -2,6 +2,8 @@
 
 Product site for [Sentinel Auth](https://github.com/sidxz/Sentinel). Docs live at https://docs.sentinel-auth.com.
 
+> Sentinel Auth is an independent open-source project and is not affiliated with Microsoft or other Sentinel-branded products.
+
 ```bash
 pnpm install
 pnpm dev                 # http://localhost:3000
