@@ -9,11 +9,12 @@ This version has breaking changes — read the relevant guide in `node_modules/n
 
 ## Design system (sibling of sidxz/docustore-site)
 - **Palette:** white paper, ink `#0b0b0d`, `#f5f5f5` washes. Near-monochrome.
-- **The one accent:** Duar red `#f43737` (`--color-brand`). It appears ONLY in: logo hexagon, hero eyebrow's first two words, the three stat numbers, capability-card wash tops, hero SVG shield + minted-token edge, one topology node, CTA border, footer hairline, security-checklist checks, one line per SDK code card. Everything else stays monochrome. Do not add red elsewhere. Never yellow.
+- **The one accent:** Duar red `#f43737` (`--color-brand`). It appears ONLY in: the header band (`bg-brand`, paper text, white CTA), hero eyebrow's first two words, the three stat numbers, capability-card wash tops, hero SVG shield + minted-token edge, one topology node, CTA border, footer hairline, security-checklist checks, one line per SDK code card. Everything else stays monochrome. Do not add red elsewhere. Never yellow.
 - **Type:** IBM Plex Sans (display + body) + IBM Plex Mono (eyebrows, labels, buttons — uppercase, tracked). Self-hosted `src/app/fonts/*.woff2` (latin subset — no `→ ✓ ▶`; use lucide icons / SVG paths). No Google Fonts. No serif.
 - **Buttons:** `rounded-none`, mono uppercase; `src/lib/cta.ts`. Cards `rounded-2xl`. Container `max-w-6xl px-6`. Eyebrows `/ Label`.
 - **Tokens:** `src/app/globals.css`. Links: `src/lib/links.ts`. Static assets: always `asset("/path")` (basePath).
-- **Art** is hand-authored SVG in `src/components/marketing/`. No rasters except user-provided admin screenshots in `public/screenshots/` (via `ScreenshotFrame src=`).
+- **Logo:** the real brand mark `public/logo.png` (black shield, yellow hexagon; transparent) via `Logo` in `src/components/layout/logo.tsx`; favicon `src/app/icon.png`. Source PSD/PNG: `~/workspace/logos/duar/`.
+- **Art** is hand-authored SVG in `src/components/marketing/`. No other rasters except user-provided admin screenshots in `public/screenshots/` (via `ScreenshotFrame src=`).
 - **Motion:** only `tier-stack.tsx` (IntersectionObserver explode; reduced-motion → static SSR state).
 
 ## Verify (do this before claiming anything looks right)

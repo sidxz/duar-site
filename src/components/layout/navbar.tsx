@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Logo } from "@/components/layout/logo";
-import { ctaPrimarySm } from "@/lib/cta";
+import { ctaOnBrandSm } from "@/lib/cta";
 import { links } from "@/lib/links";
 
 function GithubIcon({ className }: { className?: string }) {
@@ -13,14 +13,14 @@ function GithubIcon({ className }: { className?: string }) {
 }
 
 const navLink =
-  "label-mono text-[11px] text-muted-foreground transition-colors hover:text-ink";
+  "label-mono text-[11px] text-paper/80 transition-colors hover:text-paper";
 
 export function Navbar() {
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-background/85 backdrop-blur-xl">
+    <header className="sticky top-0 z-50 bg-brand text-paper">
       <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-6">
         <Link href="/" aria-label="Duar home">
-          <Logo />
+          <Logo inverted />
         </Link>
         <nav className="flex items-center gap-5 sm:gap-7">
           <Link href="/#features" className={`${navLink} hidden sm:inline`}>
@@ -39,12 +39,12 @@ export function Navbar() {
             href={links.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden text-muted-foreground transition-colors hover:text-ink sm:inline-flex"
+            className="hidden text-paper/80 transition-colors hover:text-paper sm:inline-flex"
             aria-label="GitHub"
           >
             <GithubIcon className="h-[18px] w-[18px]" />
           </a>
-          <a href={links.gettingStarted} className={ctaPrimarySm}>
+          <a href={links.gettingStarted} className={ctaOnBrandSm}>
             Get started
           </a>
         </nav>
