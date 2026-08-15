@@ -1,11 +1,13 @@
 import { ArrowRight, ArrowUpRight, Check } from "lucide-react";
 import { ctaPrimary, ctaOutline } from "@/lib/cta";
 import { links } from "@/lib/links";
+import { asset } from "@/lib/asset";
 import { TokenFlow } from "@/components/marketing/token-flow";
 import { IdpDemo, WorkspaceDemo, TiersDemo, ServiceDemo } from "@/components/marketing/capability-demos";
 import { TierStack } from "@/components/marketing/tier-stack";
 import { CodeCard, type CodeLine } from "@/components/marketing/code-card";
 import { ScreenshotFrame } from "@/components/marketing/screenshot-frame";
+import { Topology } from "@/components/marketing/topology";
 
 const steps = [
   {
@@ -208,6 +210,18 @@ const security = [
   "Trivy dependency and container scans in CI",
 ];
 
+const stack = [
+  { name: "FastAPI", role: "API layer", logo: "/logos/fastapi.svg" },
+  { name: "SQLAlchemy 2.0", role: "Async ORM", logo: "/logos/sqlalchemy.svg" },
+  { name: "PostgreSQL 16", role: "State", logo: "/logos/postgresql.svg" },
+  { name: "Redis 7", role: "Denylist · limits", logo: "/logos/redis.svg" },
+  { name: "Authlib", role: "OAuth2 / OIDC", logo: null },
+  { name: "Python 3.12", role: "Service + SDK", logo: "/logos/python.svg" },
+  { name: "React", role: "Admin · SDK", logo: "/logos/react.svg" },
+  { name: "TypeScript", role: "JS SDKs", logo: "/logos/typescript.svg" },
+  { name: "Docker", role: "ghcr.io/sidxz/sentinel", logo: "/logos/docker.svg" },
+];
+
 export default function Home() {
   return (
     <div className="flex flex-col">
@@ -404,6 +418,46 @@ export default function Home() {
             Security overview
             <ArrowRight className="h-3.5 w-3.5" />
           </a>
+        </div>
+      </section>
+
+      {/* Under the hood */}
+      <section className="mx-auto w-full max-w-6xl px-6 py-20">
+        <div className="grid gap-12 lg:grid-cols-[1.05fr_1fr] lg:items-center">
+          <div>
+            <p className="label-mono text-[11px] text-muted-foreground">/ Under the hood</p>
+            <h2 className="mt-4 text-4xl font-medium tracking-tight text-ink sm:text-5xl">
+              Built on proven infrastructure.
+            </h2>
+            <p className="mt-5 leading-relaxed text-muted-foreground">
+              FastAPI and SQLAlchemy 2.0 async on PostgreSQL 16 and Redis 7,
+              with Authlib doing the OAuth2/OIDC heavy lifting. Ships as one
+              container image. Nothing leaves your network.
+            </p>
+            <div className="mt-8 grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-3">
+              {stack.map((t) => (
+                <div key={t.name} className="group flex items-center gap-3 bg-paper px-4 py-3.5">
+                  {t.logo ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={asset(t.logo)}
+                      alt=""
+                      className="h-5 w-5 shrink-0 rounded-[3px] opacity-55 grayscale transition duration-200 group-hover:opacity-100 group-hover:grayscale-0"
+                    />
+                  ) : (
+                    <span className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-[3px] bg-wash font-mono text-[9px] text-ink">
+                      A
+                    </span>
+                  )}
+                  <div className="min-w-0">
+                    <div className="truncate text-[13px] font-medium leading-tight text-ink">{t.name}</div>
+                    <div className="label-mono mt-0.5 truncate text-[9px] text-muted-foreground">{t.role}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <Topology />
         </div>
       </section>
 
