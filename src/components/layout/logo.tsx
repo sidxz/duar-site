@@ -38,7 +38,7 @@ export function Logo({ className }: { className?: string }) {
     <span className={`inline-flex items-center gap-2 text-ink ${className ?? ""}`}>
       <LogoMark className="h-8 w-8" />
       <span className="text-[22px] font-medium tracking-tight">
-        Sentinel<span className="text-ink/30"> Auth</span>
+        Sentinel<span className="hidden text-ink/30 sm:inline"> Auth</span>
       </span>
     </span>
   );

@@ -1,9 +1,10 @@
+import Link from "next/link";
 import { Logo } from "@/components/layout/logo";
 import { links } from "@/lib/links";
 
 const columns: Record<string, { label: string; href: string }[]> = {
   Product: [
-    { label: "Features", href: "#features" },
+    { label: "Features", href: "/#features" },
     { label: "Docs", href: links.docs },
     { label: "Getting started", href: links.gettingStarted },
     { label: "Security", href: links.security },
@@ -41,15 +42,24 @@ export function Footer() {
               <ul className="mt-4 space-y-3">
                 {items.map((l) => (
                   <li key={l.href}>
-                    <a
-                      href={l.href}
-                      {...(l.href.startsWith("http")
-                        ? { target: "_blank", rel: "noopener noreferrer" }
-                        : {})}
-                      className="text-sm text-muted-foreground transition-colors hover:text-ink"
-                    >
-                      {l.label}
-                    </a>
+                    {l.href.startsWith("/") ? (
+                      <Link
+                        href={l.href}
+                        className="text-sm text-muted-foreground transition-colors hover:text-ink"
+                      >
+                        {l.label}
+                      </Link>
+                    ) : (
+                      <a
+                        href={l.href}
+                        {...(l.href.startsWith("http")
+                          ? { target: "_blank", rel: "noopener noreferrer" }
+                          : {})}
+                        className="text-sm text-muted-foreground transition-colors hover:text-ink"
+                      >
+                        {l.label}
+                      </a>
+                    )}
                   </li>
                 ))}
               </ul>

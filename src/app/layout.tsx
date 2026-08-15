@@ -22,7 +22,7 @@ const plexMono = localFont({
 
 // Set NEXT_PUBLIC_SITE_URL=https://sentinel-auth.com at the domain flip.
 const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://sidxz.github.io/sentinel-site";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://sidxz.github.io/sentinel-site/";
 
 export const metadata: Metadata = {
   title: {

@@ -98,6 +98,7 @@ const sdkCards: { title: string; install: string; lines: CodeLine[] }[] = [
       '    service_name="my-app",',
       '    service_key="sk_...",',
       '    mode="authz",',
+      '    idp_audience="your-google-client-id.apps.googleusercontent.com",',
       '    idp_jwks_url="https://www.googleapis.com/oauth2/v3/certs",',
       ")",
       "",
@@ -121,7 +122,7 @@ const sdkCards: { title: string; install: string; lines: CodeLine[] }[] = [
       "    <AuthzProvider config={{",
       '      sentinelUrl: "https://auth.example.com",',
       '      mintEndpoint: "/api/auth/mint",',
-      "      idps: { google: IdpConfigs.google(GOOGLE_CLIENT_ID) },",
+      '      idps: { google: IdpConfigs.google("your-google-client-id") },',
       "    }}>",
       { t: "      <AuthzGuard fallback={<Login />}>", k: "brand" },
       "        <Dashboard />",
@@ -257,7 +258,7 @@ export default function Home() {
               <li key={s.n} className="flex gap-5">
                 <span className="label-mono shrink-0 pt-1.5 text-[11px] text-muted-foreground">{s.n}</span>
                 <div>
-                  <h3 className="text-xl font-medium text-ink">{s.title}</h3>
+                  <p className="text-xl font-medium text-ink">{s.title}</p>
                   <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{s.desc}</p>
                 </div>
               </li>
@@ -475,7 +476,7 @@ export default function Home() {
                 Docker Compose or Kubernetes, your IdP credentials, one env
                 file. Open source, MIT, yours to run.
               </p>
-              <p className="mt-5 font-mono text-[12px] text-ink">docker pull ghcr.io/sidxz/sentinel</p>
+              <a href={links.ghcr} target="_blank" rel="noopener noreferrer" className="mt-5 inline-block font-mono text-[12px] text-ink underline-offset-4 hover:underline">docker pull ghcr.io/sidxz/sentinel</a>
             </div>
             <div className="flex shrink-0 flex-wrap gap-3">
               <a href={links.gettingStarted} className={ctaPrimary}>

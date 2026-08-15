@@ -20,7 +20,8 @@ for _ in $(seq 1 25); do
 done
 curl -sf "http://localhost:${PORT}${BP}/" | grep -q "Sentinel" || { echo "serve failed"; exit 1; }
 
-CHROME=$(ls -d "$HOME"/Library/Caches/ms-playwright/chromium_headless_shell-*/chrome-headless-shell-mac-arm64/chrome-headless-shell | tail -1)
+CHROME=$(ls -d "$HOME"/Library/Caches/ms-playwright/chromium_headless_shell-*/chrome-headless-shell-mac-arm64/chrome-headless-shell 2>/dev/null | tail -1 || true)
+[ -x "${CHROME:-}" ] || { echo "chrome-headless-shell not found — install Playwright chromium (npx playwright install chromium)"; exit 1; }
 MOTION_FLAG="--force-prefers-reduced-motion"
 [ "${MOTION:-0}" = "1" ] && MOTION_FLAG=""
 

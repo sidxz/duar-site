@@ -23,10 +23,15 @@ export function Navbar() {
           <Logo />
         </Link>
         <nav className="flex items-center gap-5 sm:gap-7">
-          <a href="#features" className={`${navLink} hidden sm:inline`}>
+          <Link href="/#features" className={`${navLink} hidden sm:inline`}>
             Features
-          </a>
-          <a href={links.docs} className={`${navLink} inline-flex items-center gap-1`}>
+          </Link>
+          <a
+            href={links.docs}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`${navLink} inline-flex items-center gap-1`}
+          >
             Docs
             <ArrowUpRight className="h-3 w-3" />
           </a>
@@ -34,7 +39,7 @@ export function Navbar() {
             href={links.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-muted-foreground transition-colors hover:text-ink"
+            className="hidden text-muted-foreground transition-colors hover:text-ink sm:inline-flex"
             aria-label="GitHub"
           >
             <GithubIcon className="h-[18px] w-[18px]" />

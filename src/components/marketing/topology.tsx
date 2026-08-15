@@ -1,6 +1,6 @@
 const EDGE = "rgba(255,255,255,0.25)";
 const JOINT = "rgba(255,255,255,0.35)";
-const LABEL = "rgba(255,255,255,0.4)";
+const LABEL = "rgba(255,255,255,0.55)";
 
 type NodeProps = { x: number; y: number; w: number; label: string; sub: string; accent?: boolean };
 
@@ -21,7 +21,7 @@ function Node({ x, y, w, label, sub, accent }: NodeProps) {
       <text x={cx} y={y + 20} textAnchor="middle" fontSize={12.5} fontWeight={500} fill="rgba(255,255,255,0.92)">
         {label}
       </text>
-      <text x={cx} y={y + 35} textAnchor="middle" fontSize={8.5} letterSpacing="0.1em" fill="rgba(255,255,255,0.38)">
+      <text x={cx} y={y + 35} textAnchor="middle" fontSize={8.5} letterSpacing="0.1em" fill="rgba(255,255,255,0.5)">
         {sub}
       </text>
     </g>
@@ -30,16 +30,17 @@ function Node({ x, y, w, label, sub, accent }: NodeProps) {
 
 export function Topology() {
   return (
-    <div className="rounded-2xl border border-border bg-ink p-7 sm:p-8">
+    <div className="min-w-0 rounded-2xl border border-border bg-ink p-7 sm:p-8">
       <div className="mb-6 flex items-center justify-between gap-4">
         <span className="label-mono text-[10px] text-paper/50">Runtime topology</span>
         <span className="label-mono text-[10px] text-paper/30">One image · Self-hosted</span>
       </div>
+      <div className="overflow-x-auto">
       <svg
         viewBox="0 0 560 324"
         role="img"
         aria-label="Runtime topology: your app signs in with the identity provider and exchanges the id_token with the Sentinel API for an authz JWT; the admin panel talks to the same API; Sentinel persists to PostgreSQL and uses Redis for the denylist, auth codes and rate limits."
-        className="h-auto w-full font-mono"
+        className="h-auto w-full min-w-[520px] font-mono lg:min-w-0"
       >
         <defs>
           <marker id="tp-arw" viewBox="0 0 8 8" refX="6.5" refY="4" markerWidth="7" markerHeight="7" orient="auto">
@@ -76,6 +77,7 @@ export function Topology() {
         <Node x={16} y={262} w={244} label="PostgreSQL" sub="USERS · WORKSPACES · ROLES · ACLS" />
         <Node x={300} y={262} w={244} label="Redis" sub="DENYLIST · AUTH CODES · RATE LIMITS" />
       </svg>
+      </div>
     </div>
   );
 }
