@@ -236,7 +236,10 @@ export default function Home() {
         <h1 className="mt-6 max-w-3xl text-5xl font-medium leading-[1.02] tracking-tight text-ink sm:text-6xl lg:text-[76px]">
           Authorization for everything after login.
         </h1>
-        <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
+        <p className="mt-5 label-mono text-[11px] text-muted-foreground">
+          <span className="text-ink">Duar</span> — Doorway for Users, Actions, and Resources
+        </p>
+        <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">
           Keep Sign in with Google, GitHub, or Entra ID exactly as it is.{" "}
           <span className="font-medium text-ink">Duar</span> adds workspaces,
           roles, and per-resource permissions — issued as one RS256 JWT and
@@ -311,7 +314,7 @@ export default function Home() {
         <div className="grid gap-12 lg:grid-cols-[1.05fr_1fr] lg:items-center">
           <TierStack className="mx-auto h-auto w-full max-w-md lg:max-w-none" />
           <div className="min-w-0">
-            <p className="label-mono text-[11px] text-muted-foreground">/ Three tiers, one dependency</p>
+            <p className="label-mono text-[11px] text-muted-foreground">/ Users · Actions · Resources — three tiers, one dependency</p>
             <h2 className="mt-4 text-4xl font-medium tracking-tight text-ink sm:text-5xl">
               Coarse to fine, without leaving the request.
             </h2>
