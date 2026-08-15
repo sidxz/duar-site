@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 
-/* Exploded view of one request passing through Sentinel's three authorization
+/* Exploded view of one request passing through Duar's three authorization
    tiers: workspace role (from the JWT, no DB), RBAC action, entity ACL. The
    exploded geometry below is the source of truth (what SSR and reduced-motion
    users get); JS collapses the plates on mount and an IntersectionObserver

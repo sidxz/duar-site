@@ -4,7 +4,7 @@ export function ScreenshotFrame({
   src,
   alt,
   label,
-  url = "admin.sentinel-auth.local",
+  url = "admin.duar.local",
 }: {
   src?: string;
   alt: string;

@@ -13,11 +13,11 @@ const steps = [
   {
     n: "01",
     title: "Sign in with your IdP",
-    desc: "Google, GitHub, Entra ID, or any OIDC provider. Your login UI, your client ID — Sentinel never sees a password.",
+    desc: "Google, GitHub, Entra ID, or any OIDC provider. Your login UI, your client ID — Duar never sees a password.",
   },
   {
     n: "02",
-    title: "Sentinel verifies and mints",
+    title: "Duar verifies and mints",
     desc: "The IdP token is checked against the provider's JWKS, then exchanged for one RS256 authz JWT carrying workspace and role claims.",
   },
   {
@@ -41,7 +41,7 @@ const stats = [
 const capabilities = [
   {
     title: "Bring your own IdP",
-    desc: "AuthZ mode: your app logs in, Sentinel verifies the IdP token and mints an authz JWT. Proxy mode if you'd rather Sentinel own the flow.",
+    desc: "AuthZ mode: your app logs in, Duar verifies the IdP token and mints an authz JWT. Proxy mode if you'd rather Duar own the flow.",
     href: links.guide("how-it-works"),
     demo: <IdpDemo />,
   },
@@ -68,19 +68,19 @@ const capabilities = [
 const tiersCode: CodeLine[] = [
   { t: "# Tier 1: workspace role from the JWT — no DB call", k: "muted" },
   '@app.get("/projects")',
-  "async def list_projects(user=Depends(sentinel.require_user)):",
+  "async def list_projects(user=Depends(duar.require_user)):",
   "    return await get_projects(user.workspace_id)",
   "",
   { t: "# Tier 2: RBAC action check", k: "muted" },
   '@app.get("/reports/export")',
   "async def export(",
-  '    user=Depends(sentinel.require_action("reports:export")),',
+  '    user=Depends(duar.require_action("reports:export")),',
   "):",
   "    ...",
   "",
   { t: "# Tier 3: entity-level permission", k: "muted" },
   '@app.get("/projects/{id}")',
-  "async def get_project(id: str, auth=Depends(sentinel.get_auth)):",
+  "async def get_project(id: str, auth=Depends(duar.get_auth)):",
   '    if not await auth.can("project", id, "view"):',
   "        raise HTTPException(403)",
 ];
@@ -88,12 +88,12 @@ const tiersCode: CodeLine[] = [
 const sdkCards: { title: string; install: string; lines: CodeLine[] }[] = [
   {
     title: "FastAPI",
-    install: "pip install sentinel-auth-sdk",
+    install: "pip install duar-auth",
     lines: [
       "from fastapi import Depends, FastAPI",
-      "from sentinel_auth import Sentinel",
+      "from duar_auth import Duar",
       "",
-      "sentinel = Sentinel(",
+      "duar = Duar(",
       '    base_url="https://auth.example.com",',
       '    service_name="my-app",',
       '    service_key="sk_...",',
@@ -102,25 +102,25 @@ const sdkCards: { title: string; install: string; lines: CodeLine[] }[] = [
       '    idp_jwks_url="https://www.googleapis.com/oauth2/v3/certs",',
       ")",
       "",
-      "app = FastAPI(lifespan=sentinel.lifespan)",
-      { t: "sentinel.protect(app)", k: "brand" },
+      "app = FastAPI(lifespan=duar.lifespan)",
+      { t: "duar.protect(app)", k: "brand" },
       "",
       '@app.get("/projects")',
-      "async def list_projects(user=Depends(sentinel.require_user)):",
+      "async def list_projects(user=Depends(duar.require_user)):",
       "    return await get_projects(user.workspace_id)",
     ],
   },
   {
     title: "React",
-    install: "npm i @sentinel-auth/react",
+    install: "npm i @duar-auth/react",
     lines: [
-      'import { IdpConfigs } from "@sentinel-auth/js";',
-      'import { AuthzProvider, AuthzGuard, useAuthz } from "@sentinel-auth/react";',
+      'import { IdpConfigs } from "@duar-auth/js";',
+      'import { AuthzProvider, AuthzGuard, useAuthz } from "@duar-auth/react";',
       "",
       "export function App() {",
       "  return (",
       "    <AuthzProvider config={{",
-      '      sentinelUrl: "https://auth.example.com",',
+      '      duarUrl: "https://auth.example.com",',
       '      mintEndpoint: "/api/auth/mint",',
       '      idps: { google: IdpConfigs.google("your-google-client-id") },',
       "    }}>",
@@ -139,13 +139,13 @@ const sdkCards: { title: string; install: string; lines: CodeLine[] }[] = [
   },
   {
     title: "Next.js",
-    install: "npm i @sentinel-auth/nextjs",
+    install: "npm i @duar-auth/nextjs",
     lines: [
       { t: "// middleware.ts", k: "muted" },
-      'import { createSentinelAuthzMiddleware } from "@sentinel-auth/nextjs/authz-middleware";',
+      'import { createDuarAuthzMiddleware } from "@duar-auth/nextjs/authz-middleware";',
       "",
-      { t: "export default createSentinelAuthzMiddleware({", k: "brand" },
-      "  sentinelUrl: process.env.SENTINEL_URL!,",
+      { t: "export default createDuarAuthzMiddleware({", k: "brand" },
+      "  duarUrl: process.env.DUAR_URL!,",
       '  idpJwksUrl: "https://www.googleapis.com/oauth2/v3/certs",',
       "  idpAudience: process.env.GOOGLE_CLIENT_ID!,",
       '  idpIssuer: "https://accounts.google.com",',
@@ -238,7 +238,7 @@ export default function Home() {
         </h1>
         <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
           Keep Sign in with Google, GitHub, or Entra ID exactly as it is.{" "}
-          <span className="font-medium text-ink">Sentinel</span> adds workspaces,
+          <span className="font-medium text-ink">Duar</span> adds workspaces,
           roles, and per-resource permissions — issued as one RS256 JWT and
           enforced by SDKs for FastAPI, React, and Next.js. Self-hosted.
         </p>
@@ -398,7 +398,7 @@ export default function Home() {
               <ArrowRight className="h-3.5 w-3.5" />
             </a>
           </div>
-          <ScreenshotFrame alt="Sentinel admin dashboard" label="Screenshot — admin dashboard" />
+          <ScreenshotFrame alt="Duar admin dashboard" label="Screenshot — admin dashboard" />
         </div>
       </section>
 
@@ -476,7 +476,7 @@ export default function Home() {
                 Docker Compose or Kubernetes, your IdP credentials, one env
                 file. Open source, MIT, yours to run.
               </p>
-              <a href={links.ghcr} target="_blank" rel="noopener noreferrer" className="mt-5 inline-block font-mono text-[12px] text-ink underline-offset-4 hover:underline">docker pull ghcr.io/sidxz/sentinel</a>
+              <a href={links.ghcr} target="_blank" rel="noopener noreferrer" className="mt-5 inline-block font-mono text-[12px] text-ink underline-offset-4 hover:underline">docker pull ghcr.io/sidxz/duar</a>
             </div>
             <div className="flex shrink-0 flex-wrap gap-3">
               <a href={links.gettingStarted} className={ctaPrimary}>

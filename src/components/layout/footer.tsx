@@ -10,10 +10,10 @@ const columns: Record<string, { label: string; href: string }[]> = {
     { label: "Security", href: links.security },
   ],
   SDKs: [
-    { label: "sentinel-auth-sdk (PyPI)", href: links.pypi },
-    { label: "@sentinel-auth/js", href: links.npm("js") },
-    { label: "@sentinel-auth/react", href: links.npm("react") },
-    { label: "@sentinel-auth/nextjs", href: links.npm("nextjs") },
+    { label: "duar-auth (PyPI)", href: links.pypi },
+    { label: "@duar-auth/js", href: links.npm("js") },
+    { label: "@duar-auth/react", href: links.npm("react") },
+    { label: "@duar-auth/nextjs", href: links.npm("nextjs") },
   ],
   Community: [
     { label: "GitHub", href: links.github },
@@ -68,14 +68,10 @@ export function Footer() {
         </div>
         <div className="mt-14 flex flex-col items-start justify-between gap-3 border-t border-border pt-8 sm:flex-row sm:items-center">
           <p className="label-mono text-[10px] text-muted-foreground">
-            &copy; {new Date().getFullYear()} Sentinel Auth
+            &copy; {new Date().getFullYear()} Duar
           </p>
           <p className="label-mono text-[10px] text-muted-foreground">MIT License</p>
         </div>
-        <p className="mt-4 max-w-2xl text-xs leading-relaxed text-muted-foreground">
-          Sentinel Auth is an independent open-source project and is not
-          affiliated with Microsoft or other Sentinel-branded products.
-        </p>
       </div>
     </footer>
   );

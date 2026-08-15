@@ -39,7 +39,7 @@ export function Topology() {
       <svg
         viewBox="0 0 560 324"
         role="img"
-        aria-label="Runtime topology: your app signs in with the identity provider and exchanges the id_token with the Sentinel API for an authz JWT; the admin panel talks to the same API; Sentinel persists to PostgreSQL and uses Redis for the denylist, auth codes and rate limits."
+        aria-label="Runtime topology: your app signs in with the identity provider and exchanges the id_token with the Duar API for an authz JWT; the admin panel talks to the same API; Duar persists to PostgreSQL and uses Redis for the denylist, auth codes and rate limits."
         className="h-auto w-full min-w-[520px] font-mono lg:min-w-0"
       >
         <defs>
@@ -72,7 +72,7 @@ export function Topology() {
         {/* Nodes */}
         <Node x={16} y={16} w={200} label="Your app + SDK" sub="FASTAPI · REACT · NEXT.JS" />
         <Node x={344} y={16} w={200} label="Identity provider" sub="GOOGLE · GITHUB · ENTRA ID" />
-        <Node x={16} y={126} w={304} label="Sentinel API" sub="FASTAPI · AUTHZ + PROXY MODES" accent />
+        <Node x={16} y={126} w={304} label="Duar API" sub="FASTAPI · AUTHZ + PROXY MODES" accent />
         <Node x={344} y={126} w={200} label="Admin panel" sub="REACT SPA" />
         <Node x={16} y={262} w={244} label="PostgreSQL" sub="USERS · WORKSPACES · ROLES · ACLS" />
         <Node x={300} y={262} w={244} label="Redis" sub="DENYLIST · AUTH CODES · RATE LIMITS" />

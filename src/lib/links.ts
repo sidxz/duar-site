@@ -1,5 +1,5 @@
-const DOCS = "https://docs.sentinel-auth.com";
-const GITHUB = "https://github.com/sidxz/Sentinel";
+const DOCS = "https://sidxz.github.io/duar"; // → "https://docs.duar.io" once DNS is pointed
+const GITHUB = "https://github.com/sidxz/duar";
 
 export const links = {
   docs: `${DOCS}/`,
@@ -13,8 +13,8 @@ export const links = {
   github: GITHUB,
   issues: `${GITHUB}/issues`,
   changelog: `${GITHUB}/blob/main/CHANGELOG.md`,
-  pypi: "https://pypi.org/project/sentinel-auth-sdk/",
+  pypi: "https://pypi.org/project/duar-auth/",
   npm: (pkg: "js" | "react" | "nextjs") =>
-    `https://www.npmjs.com/package/@sentinel-auth/${pkg}`,
-  ghcr: `${GITHUB}/pkgs/container/sentinel`,
+    `https://www.npmjs.com/package/@duar-auth/${pkg}`,
+  ghcr: `${GITHUB}/pkgs/container/duar`,
 } as const;

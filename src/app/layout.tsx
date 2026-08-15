@@ -20,17 +20,17 @@ const plexMono = localFont({
   display: "swap",
 });
 
-// Set NEXT_PUBLIC_SITE_URL=https://sentinel-auth.com at the domain flip.
+// Set NEXT_PUBLIC_SITE_URL=https://duar.io at the domain flip.
 const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://sidxz.github.io/sentinel-site/";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://sidxz.github.io/duar-site/";
 
 export const metadata: Metadata = {
   title: {
-    default: "Sentinel Auth — Authorization for everything after login",
-    template: "%s | Sentinel Auth",
+    default: "Duar — Authorization for everything after login",
+    template: "%s | Duar",
   },
   description:
-    "Bring your own IdP. Sentinel adds workspaces, roles, and per-resource permissions — one RS256 JWT, SDKs for FastAPI, React, and Next.js. Self-hosted, open source.",
+    "Bring your own IdP. Duar adds workspaces, roles, and per-resource permissions — one RS256 JWT, SDKs for FastAPI, React, and Next.js. Self-hosted, open source.",
   metadataBase: new URL(SITE_URL),
 };
 

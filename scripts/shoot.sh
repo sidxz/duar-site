@@ -5,7 +5,7 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 NAME="${1:-page}"
-BP="/sentinel-site"
+BP="/duar-site"
 PORT=3789
 
 NEXT_PUBLIC_BASE_PATH="$BP" pnpm build >/dev/null
@@ -18,7 +18,7 @@ for _ in $(seq 1 25); do
   curl -sf "http://localhost:${PORT}${BP}/" >/dev/null 2>&1 && break
   sleep 0.2
 done
-curl -sf "http://localhost:${PORT}${BP}/" | grep -q "Sentinel" || { echo "serve failed"; exit 1; }
+curl -sf "http://localhost:${PORT}${BP}/" | grep -q "Duar" || { echo "serve failed"; exit 1; }
 
 CHROME=$(ls -d "$HOME"/Library/Caches/ms-playwright/chromium_headless_shell-*/chrome-headless-shell-mac-arm64/chrome-headless-shell 2>/dev/null | tail -1 || true)
 [ -x "${CHROME:-}" ] || { echo "chrome-headless-shell not found — install Playwright chromium (npx playwright install chromium)"; exit 1; }

@@ -1,4 +1,4 @@
-/* Sentinel mark — a line-art distillation of the existing shield logo:
+/* Duar mark — a line-art distillation of the duar.io shield logo:
    shield outline (currentColor), hexagon core in brand red (the single accent,
    like docustore's hexagon), keyhole in currentColor, two circuit stubs.
    Favicon (src/app/icon.svg) is the hexagon+keyhole fragment; keep in sync. */
@@ -38,7 +38,7 @@ export function Logo({ className }: { className?: string }) {
     <span className={`inline-flex items-center gap-2 text-ink ${className ?? ""}`}>
       <LogoMark className="h-8 w-8" />
       <span className="text-[22px] font-medium tracking-tight">
-        Sentinel<span className="hidden text-ink/30 sm:inline"> Auth</span>
+        Duar<span className="text-ink/30">.io</span>
       </span>
     </span>
   );

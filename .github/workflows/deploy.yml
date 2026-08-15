@@ -34,8 +34,8 @@ jobs:
       - run: pnpm build
         env:
           # Project-page URL for now. Delete this line + add public/CNAME at the domain flip.
-          NEXT_PUBLIC_BASE_PATH: /sentinel-site
-          NEXT_PUBLIC_SITE_URL: https://sidxz.github.io/sentinel-site
+          NEXT_PUBLIC_BASE_PATH: /duar-site
+          NEXT_PUBLIC_SITE_URL: https://sidxz.github.io/duar-site
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

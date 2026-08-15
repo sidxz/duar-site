@@ -1,5 +1,5 @@
 /* Hero graphic — the AuthZ-mode handshake. Your IdP issues an id_token; the
-   app hands it to Sentinel, which verifies it against the IdP's JWKS and mints
+   app hands it to Duar, which verifies it against the IdP's JWKS and mints
    one RS256 authz JWT carrying workspace + role claims; the SDK enforces that
    JWT in your app. Static, server-rendered. Brand red marks the shield and the
    minted-token edge only. */
@@ -16,7 +16,7 @@ const claims: [string, string][] = [
   ["sub", '"u_7f3a9c"'],
   ["workspace_id", '"ws_acme"'],
   ["workspace_role", '"editor"'],
-  ["aud", '"sentinel:access"'],
+  ["aud", '"duar:access"'],
   ["jti", '"9c1e-…"'],
 ];
 
@@ -25,7 +25,7 @@ export function TokenFlow({ className }: { className?: string }) {
     <svg
       viewBox="0 0 520 290"
       role="img"
-      aria-label="Google, GitHub, or Entra ID issue an id_token; Sentinel verifies it and mints an RS256 authz JWT with sub, workspace_id and workspace_role claims; your app's SDK enforces it"
+      aria-label="Google, GitHub, or Entra ID issue an id_token; Duar verifies it and mints an RS256 authz JWT with sub, workspace_id and workspace_role claims; your app's SDK enforces it"
       className={className}
     >
       <defs>
@@ -57,7 +57,7 @@ export function TokenFlow({ className }: { className?: string }) {
         ID_TOKEN
       </text>
 
-      {/* Sentinel — shield with keyhole (brand) */}
+      {/* Duar — shield with keyhole (brand) */}
       <path
         d="M240 96 L274 109 V146 C274 169 258 184 240 192 C222 184 206 169 206 146 V109 Z"
         fill="#ffffff"
@@ -68,7 +68,7 @@ export function TokenFlow({ className }: { className?: string }) {
       <circle cx="240" cy="136" r="7" fill="none" stroke="var(--color-brand)" strokeWidth="1.6" />
       <path d="M236.5 142 L243.5 142 L246 160 L234 160 Z" fill="none" stroke="var(--color-brand)" strokeWidth="1.6" strokeLinejoin="round" />
       <text x="240" y="214" textAnchor="middle" fontFamily={MONO} fontSize="9" letterSpacing="0.14em" fill={INK} opacity="0.55">
-        SENTINEL
+        DUAR
       </text>
 
       {/* minted token edge (brand) */}
