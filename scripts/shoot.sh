@@ -5,11 +5,12 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 NAME="${1:-page}"
-BP="/duar-site"
+BP=""   # production is served at the domain root (duar.io); set "/x" to test a sub-path build
 PORT=3789
 
 NEXT_PUBLIC_BASE_PATH="$BP" pnpm build >/dev/null
-rm -rf .verify/serve && mkdir -p .verify/serve && ln -s "$PWD/out" ".verify/serve${BP}"
+rm -rf .verify/serve && mkdir -p .verify/serve
+if [ -n "$BP" ]; then ln -s "$PWD/out" ".verify/serve${BP}"; else rm -rf .verify/serve && ln -s "$PWD/out" .verify/serve; fi
 for p in $(lsof -tiTCP:$PORT -sTCP:LISTEN 2>/dev/null); do kill -9 "$p"; done
 python3 -m http.server "$PORT" -d .verify/serve >/dev/null 2>&1 &
 SRV=$!

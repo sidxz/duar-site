@@ -21,5 +21,4 @@ This version has breaking changes — read the relevant guide in `node_modules/n
 `scripts/shoot.sh <name>` builds with the deploy basePath, serves `out/` under `/duar-site`, and writes `.verify/<name>-{desktop,mobile}.png`. **Read the PNGs.** `MOTION=1 scripts/shoot.sh x` captures the animated path (under virtual time the transition may freeze mid-way or fully settle; a shot that differs from the reduced-motion one proves the JS path ran — it is not the beauty shot).
 
 ## Deploy / domain
-Push to `main` → `.github/workflows/deploy.yml` → https://sidxz.github.io/duar-site/.
-Domain flip to duar.io: remove `NEXT_PUBLIC_BASE_PATH` from the workflow, set `NEXT_PUBLIC_SITE_URL=https://duar.io`, add `public/CNAME` containing `duar.io`, point apex A records at GitHub Pages, enable Enforce HTTPS.
+Push to `main` → `.github/workflows/deploy.yml` → https://duar.io (custom domain via `public/CNAME`; no basePath). Docs: https://docs.duar.io.

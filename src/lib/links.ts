@@ -1,4 +1,4 @@
-const DOCS = "https://sidxz.github.io/duar"; // → "https://docs.duar.io" once DNS is pointed
+const DOCS = "https://docs.duar.io";
 const GITHUB = "https://github.com/sidxz/duar";
 
 export const links = {

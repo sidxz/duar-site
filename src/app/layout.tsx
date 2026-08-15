@@ -20,9 +20,8 @@ const plexMono = localFont({
   display: "swap",
 });
 
-// Set NEXT_PUBLIC_SITE_URL=https://duar.io at the domain flip.
 const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://sidxz.github.io/duar-site/";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://duar.io/";
 
 export const metadata: Metadata = {
   title: {
