@@ -165,7 +165,7 @@ export default function Home() {
       <section className="mx-auto w-full max-w-6xl px-6 py-20">
         <div className="grid gap-12 lg:grid-cols-[1.05fr_1fr] lg:items-center">
           <TierStack className="mx-auto h-auto w-full max-w-md lg:max-w-none" />
-          <div>
+          <div className="min-w-0">
             <p className="label-mono text-[11px] text-muted-foreground">/ Three tiers, one dependency</p>
             <h2 className="mt-4 text-4xl font-medium tracking-tight text-ink sm:text-5xl">
               Coarse to fine, without leaving the request.

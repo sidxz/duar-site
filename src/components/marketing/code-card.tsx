@@ -14,7 +14,7 @@ export function CodeCard({
   className?: string;
 }) {
   return (
-    <div className={`flex flex-col overflow-hidden rounded-2xl border border-border bg-paper ${className ?? ""}`}>
+    <div className={`flex min-w-0 flex-col overflow-hidden rounded-2xl border border-border bg-paper ${className ?? ""}`}>
       <div className="flex items-center justify-between gap-4 border-b border-border bg-wash px-5 py-3">
         <span className="label-mono text-[10px] text-ink">{title}</span>
         {install && <span className="truncate font-mono text-[10px] text-muted-foreground">{install}</span>}
