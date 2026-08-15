@@ -1,7 +1,8 @@
-import { ArrowUpRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { ctaPrimary, ctaOutline } from "@/lib/cta";
 import { links } from "@/lib/links";
 import { TokenFlow } from "@/components/marketing/token-flow";
+import { IdpDemo, WorkspaceDemo, TiersDemo, ServiceDemo } from "@/components/marketing/capability-demos";
 
 const steps = [
   {
@@ -30,6 +31,33 @@ const stats = [
   { value: "3", label: "Authorization tiers, coarse to per-resource" },
   { value: "4", label: "SDKs — Python, JS, React, Next.js" },
   { value: "0", label: "Passwords stored. Ever." },
+];
+
+const capabilities = [
+  {
+    title: "Bring your own IdP",
+    desc: "AuthZ mode: your app logs in, Sentinel verifies the IdP token and mints an authz JWT. Proxy mode if you'd rather Sentinel own the flow.",
+    href: links.guide("how-it-works"),
+    demo: <IdpDemo />,
+  },
+  {
+    title: "Workspaces & organizations",
+    desc: "Multi-tenant by default. owner / admin / editor / viewer, groups, and email-domain organizations.",
+    href: links.guide("workspaces"),
+    demo: <WorkspaceDemo />,
+  },
+  {
+    title: "Three-tier authorization",
+    desc: "Workspace roles in the JWT, RBAC actions in the DB, Zanzibar-style entity ACLs per resource.",
+    href: links.guide("authorization"),
+    demo: <TiersDemo />,
+  },
+  {
+    title: "Service-to-service",
+    desc: "Service keys, realms, and m2m calls with or without a user in context.",
+    href: links.guide("service-apps"),
+    demo: <ServiceDemo />,
+  },
 ];
 
 export default function Home() {
@@ -82,6 +110,33 @@ export default function Home() {
               <div className="text-6xl font-medium tracking-tight text-brand">{s.value}</div>
               <p className="mt-3 label-mono text-[11px] text-muted-foreground">{s.label}</p>
             </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Capabilities */}
+      <section id="features" className="mx-auto w-full max-w-6xl scroll-mt-20 px-6 py-16">
+        <p className="label-mono text-[11px] text-muted-foreground">/ How it works</p>
+        <h2 className="mt-4 max-w-2xl text-4xl font-medium tracking-tight text-ink sm:text-5xl">
+          Everything your IdP doesn&apos;t do.
+        </h2>
+        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {capabilities.map((c) => (
+            <a
+              key={c.title}
+              href={c.href}
+              className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-paper transition-shadow hover:shadow-[0_12px_40px_rgba(11,11,13,0.09)]"
+            >
+              <div className="bg-brand-wash px-7 pt-8">{c.demo}</div>
+              <div className="p-7">
+                <h3 className="text-lg font-medium text-ink">{c.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{c.desc}</p>
+                <span className="mt-4 inline-flex items-center gap-1.5 label-mono text-[11px] text-ink">
+                  Learn more
+                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                </span>
+              </div>
+            </a>
           ))}
         </div>
       </section>
