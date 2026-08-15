@@ -3,6 +3,8 @@ import { ctaPrimary, ctaOutline } from "@/lib/cta";
 import { links } from "@/lib/links";
 import { TokenFlow } from "@/components/marketing/token-flow";
 import { IdpDemo, WorkspaceDemo, TiersDemo, ServiceDemo } from "@/components/marketing/capability-demos";
+import { TierStack } from "@/components/marketing/tier-stack";
+import { CodeCard, type CodeLine } from "@/components/marketing/code-card";
 
 const steps = [
   {
@@ -58,6 +60,24 @@ const capabilities = [
     href: links.guide("service-apps"),
     demo: <ServiceDemo />,
   },
+];
+
+const tiersCode: CodeLine[] = [
+  { t: "# Tier 1: workspace role from the JWT — no DB call", k: "muted" },
+  '@app.get("/projects")',
+  "async def list_projects(user=Depends(sentinel.require_user)):",
+  "    return await get_projects(user.workspace_id)",
+  "",
+  { t: "# Tier 2: RBAC action check", k: "muted" },
+  '@app.get("/reports/export")',
+  'async def export(user=Depends(sentinel.require_action("reports:export"))):',
+  "    ...",
+  "",
+  { t: "# Tier 3: entity-level permission", k: "muted" },
+  '@app.get("/projects/{id}")',
+  "async def get_project(id: str, auth=Depends(sentinel.get_auth)):",
+  '    if not await auth.can("project", id, "view"):',
+  "        raise HTTPException(403)",
 ];
 
 export default function Home() {
@@ -138,6 +158,25 @@ export default function Home() {
               </div>
             </a>
           ))}
+        </div>
+      </section>
+
+      {/* Authorization deep-dive */}
+      <section className="mx-auto w-full max-w-6xl px-6 py-20">
+        <div className="grid gap-12 lg:grid-cols-[1.05fr_1fr] lg:items-center">
+          <TierStack className="mx-auto h-auto w-full max-w-md lg:max-w-none" />
+          <div>
+            <p className="label-mono text-[11px] text-muted-foreground">/ Three tiers, one dependency</p>
+            <h2 className="mt-4 text-4xl font-medium tracking-tight text-ink sm:text-5xl">
+              Coarse to fine, without leaving the request.
+            </h2>
+            <p className="mt-5 leading-relaxed text-muted-foreground">
+              The workspace role rides in the JWT — no database call. RBAC
+              actions and Zanzibar-style entity ACLs answer the finer questions
+              from the same service, through the same dependency.
+            </p>
+            <CodeCard title="FastAPI" lines={tiersCode} className="mt-8" />
+          </div>
         </div>
       </section>
 
