@@ -73,7 +73,9 @@ const tiersCode: CodeLine[] = [
   "",
   { t: "# Tier 2: RBAC action check", k: "muted" },
   '@app.get("/reports/export")',
-  'async def export(user=Depends(sentinel.require_action("reports:export"))):',
+  "async def export(",
+  '    user=Depends(sentinel.require_action("reports:export")),',
+  "):",
   "    ...",
   "",
   { t: "# Tier 3: entity-level permission", k: "muted" },
@@ -219,7 +221,7 @@ const stack = [
   { name: "Python 3.12", role: "Service + SDK", logo: "/logos/python.svg" },
   { name: "React", role: "Admin · SDK", logo: "/logos/react.svg" },
   { name: "TypeScript", role: "JS SDKs", logo: "/logos/typescript.svg" },
-  { name: "Docker", role: "ghcr.io/sidxz/sentinel", logo: "/logos/docker.svg" },
+  { name: "Docker", role: "Container image", logo: "/logos/docker.svg" },
 ];
 
 export default function Home() {
@@ -461,7 +463,35 @@ export default function Home() {
         </div>
       </section>
 
-      {/* @@NEXT_SECTION */}
+      {/* CTA */}
+      <section className="mx-auto w-full max-w-6xl px-6 pb-24">
+        <div className="rounded-2xl bg-brand p-[1.5px]">
+          <div className="flex flex-col items-start gap-8 rounded-[15px] bg-paper px-8 py-14 sm:px-14 md:flex-row md:items-center md:justify-between">
+            <div>
+              <h2 className="max-w-md text-3xl font-medium tracking-tight text-ink sm:text-4xl">
+                Ship auth in an afternoon.
+              </h2>
+              <p className="mt-4 max-w-md text-muted-foreground">
+                Docker Compose or Kubernetes, your IdP credentials, one env
+                file. Open source, MIT, yours to run.
+              </p>
+              <p className="mt-5 font-mono text-[12px] text-ink">docker pull ghcr.io/sidxz/sentinel</p>
+            </div>
+            <div className="flex shrink-0 flex-wrap gap-3">
+              <a href={links.gettingStarted} className={ctaPrimary}>
+                Get started
+              </a>
+              <a href={links.github} target="_blank" rel="noopener noreferrer" className={ctaOutline}>
+                Star on GitHub
+                <ArrowUpRight className="h-4 w-4" />
+              </a>
+            </div>
+          </div>
+        </div>
+        <p className="mt-4 label-mono text-[10px] text-muted-foreground">
+          Beta — APIs may change before 1.0.
+        </p>
+      </section>
     </div>
   );
 }

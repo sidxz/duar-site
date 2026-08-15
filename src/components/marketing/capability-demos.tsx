@@ -63,7 +63,8 @@ export function TiersDemo() {
 export function ServiceDemo() {
   return (
     <div className={win}>
-      <div>X-Service-Key: sk_live_9f…</div>
+      <div className="text-muted-foreground">X-Service-Key</div>
+      <div>sk_live_9f3a…</div>
       <div className="mt-1 flex items-center gap-2">
         <span>realm: platform</span>
         <Check className="h-3 w-3 text-ink" />

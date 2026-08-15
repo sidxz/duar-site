@@ -30,6 +30,6 @@ shot() {
     --virtual-time-budget=2600 $MOTION_FLAG \
     --screenshot=".verify/$NAME-$2.png" "http://localhost:${PORT}${BP}/" 2>/dev/null
 }
-shot 1440,6800 desktop
-shot 390,11900 mobile
+shot 1440,8000 desktop
+shot 390,14000 mobile
 echo ".verify/$NAME-desktop.png .verify/$NAME-mobile.png"

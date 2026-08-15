@@ -16,9 +16,9 @@ const INK = "#0b0b0d";
 const MONO = "var(--font-plex-mono), monospace";
 
 const plates = [
-  { y: 40, title: "WORKSPACE ROLES", sub: "JWT CLAIMS · NO DB CALL", chip: "role: editor", w: 100 },
-  { y: 170, title: "CUSTOM RBAC", sub: "ACTIONS · ROLES · DB", chip: "reports:export", w: 116 },
-  { y: 300, title: "ENTITY ACLS", sub: "ZANZIBAR-STYLE · PER RESOURCE", chip: "document:42 · view", w: 140 },
+  { y: 40, title: "WORKSPACE ROLES", sub: "JWT CLAIMS · NO DB CALL", chip: "role: editor", w: 108 },
+  { y: 170, title: "CUSTOM RBAC", sub: "ACTIONS · ROLES · DB", chip: "reports:export", w: 124 },
+  { y: 300, title: "ENTITY ACLS", sub: "ZANZIBAR-STYLE · PER RESOURCE", chip: "document:42 · view", w: 150 },
 ];
 
 export function TierStack({ className }: { className?: string }) {
@@ -65,7 +65,7 @@ export function TierStack({ className }: { className?: string }) {
   return (
     <svg
       ref={svgRef}
-      viewBox="0 0 480 500"
+      viewBox="0 0 490 500"
       role="img"
       aria-label="A request GET /projects/42 passes down through three plates — workspace roles from the JWT, custom RBAC actions, entity ACLs — each emitting a verdict chip, and exits as 200 OK"
       className={className}
