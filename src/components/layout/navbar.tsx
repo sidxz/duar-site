@@ -13,7 +13,7 @@ function GithubIcon({ className }: { className?: string }) {
 }
 
 const navLink =
-  "label-mono inline-flex items-center gap-1 text-[11px] text-muted-foreground transition-colors hover:text-ink";
+  "label-mono text-[11px] text-muted-foreground transition-colors hover:text-ink";
 
 export function Navbar() {
   return (
@@ -23,10 +23,10 @@ export function Navbar() {
           <Logo />
         </Link>
         <nav className="flex items-center gap-5 sm:gap-7">
-          <a href="#features" className={`${navLink} hidden sm:inline-flex`}>
+          <a href="#features" className={`${navLink} hidden sm:inline`}>
             Features
           </a>
-          <a href={links.docs} className={navLink}>
+          <a href={links.docs} className={`${navLink} inline-flex items-center gap-1`}>
             Docs
             <ArrowUpRight className="h-3 w-3" />
           </a>
