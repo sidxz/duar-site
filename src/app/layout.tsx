@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { Navbar } from "@/components/layout/navbar";
+import { Footer } from "@/components/layout/footer";
 import "./globals.css";
 
 const plexSans = localFont({
@@ -38,7 +40,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${plexSans.variable} ${plexMono.variable}`}>
       <body className="min-h-screen bg-background font-sans text-foreground antialiased">
+        <Navbar />
         <main>{children}</main>
+        <Footer />
       </body>
     </html>
   );
