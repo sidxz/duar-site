@@ -17,7 +17,7 @@ Currently served at https://sidxz.github.io/sentinel-site/ via `NEXT_PUBLIC_BASE
 ## Moving to sentinel-auth.com
 1. In `deploy.yml`, delete the `NEXT_PUBLIC_BASE_PATH` line and set `NEXT_PUBLIC_SITE_URL: https://sentinel-auth.com`.
 2. Add `public/CNAME` containing `sentinel-auth.com`.
-3. Point the apex A records at GitHub Pages (185.199.108.153, .109.153, .110.153, .111.153) and enable "Enforce HTTPS" in repo Settings → Pages. After the domain shows as verified in Settings → Pages, enable Enforce HTTPS.
+3. Point the apex A records at GitHub Pages (185.199.108.153, .109.153, .110.153, .111.153). Once the domain shows as verified in repo Settings → Pages, enable "Enforce HTTPS".
 
 ## Adding admin screenshots
 Drop PNGs into `public/screenshots/` and pass `src="/screenshots/<file>.png"` to `ScreenshotFrame` in `src/app/page.tsx`.
