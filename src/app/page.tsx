@@ -14,22 +14,22 @@ const steps = [
   {
     n: "01",
     title: "Sign in with your IdP",
-    desc: "Google, GitHub, Entra ID, or any OIDC provider. Your login UI, your client ID — Duar never sees a password.",
+    desc: "Google, GitHub, Entra ID, or any OIDC provider. Your login UI, your client ID. Duar never sees a password.",
   },
   {
     n: "02",
-    title: "Duar verifies and mints",
-    desc: "The IdP token is checked against the provider's JWKS, then exchanged for one RS256 authz JWT carrying workspace and role claims.",
+    title: "Duar enhances the token",
+    desc: "The IdP token is checked against the provider's JWKS, then exchanged or minted for an authz JWT carrying workspace and role claims.",
   },
   {
     n: "03",
-    title: "Your SDK enforces",
-    desc: "require_user, require_action, can() — FastAPI dependencies, React guards, and Next.js middleware read the same token.",
+    title: "Your App enforces with Duar's SDKs",
+    desc: "require_user, require_action, can(). FastAPI dependencies, React guards, and Next.js middleware read the same token.",
   },
   {
     n: "04",
     title: "Manage it in the admin panel",
-    desc: "Users, workspaces, roles, grants, service apps, activity — one React SPA, no SQL console.",
+    desc: "Users, workspaces, roles, grants, service apps, activity.",
   },
 ];
 
@@ -159,8 +159,8 @@ const sdkCards: { title: string; install: string; lines: CodeLine[] }[] = [
 const problems = [
   {
     title: "JWT validation, per service",
-    pain: "JWKS fetch, audience, clock skew, key rotation — re-implemented in every backend.",
-    fix: "The SDK does it: RS256, kid rotation, /.well-known/jwks.json.",
+    pain: "JWKS fetch, audience, clock skew, key rotation, re-implemented in every backend.",
+    fix: "The SDK does it once, with a single config for all services.",
   },
   {
     title: "A roles table in every app",
@@ -174,7 +174,7 @@ const problems = [
   },
   {
     title: "Tenant isolation by convention",
-    pain: "The workspace_id filter someone forgets.",
+    pain: "The workspace id filter is bypassed accidentally.",
     fix: "Workspace-scoped claims; roles and grants can't cross tenants.",
   },
   {
@@ -183,9 +183,9 @@ const problems = [
     fix: "Refresh rotation, reuse detection, Redis denylist, jti — built in.",
   },
   {
-    title: "No admin UI",
-    pain: "Auth state lives in SQL consoles and Slack threads.",
-    fix: "React admin: users, workspaces, roles, grants, service apps, activity, usage.",
+    title: "Admin UI",
+    pain: "Auth state lives in SQL consoles.",
+    fix: "Unified Duar Admin UI: users, workspaces, roles, grants, service apps, activity, usage.",
   },
 ];
 
@@ -228,22 +228,16 @@ export default function Home() {
           Pulled up under the 66px sticky navbar so the nav's translucent ink has the glow behind it. */}
       <div className="relative isolate -mt-[66px] overflow-hidden bg-ink pt-[66px] text-paper">
         <HeroBackdrop />
-        <section className="mx-auto w-full max-w-6xl px-6 pt-16 pb-16">
-          <span className="inline-flex h-7 items-center gap-2 rounded-full border border-paper/15 px-3 label-mono text-[10px] text-paper/60">
-            <span className="h-1.5 w-1.5 rounded-full bg-brand shadow-[0_0_10px_var(--color-brand)]" />
-            Beta · self-hosted · MIT
-          </span>
-          <h1 className="mt-6 max-w-3xl text-5xl font-medium leading-[1.02] tracking-tight sm:text-6xl lg:text-[76px]">
+        <section className="mx-auto w-full max-w-6xl px-6 pt-3 pb-16">
+          <h1 className="mt-2 max-w-3xl text-5xl font-medium leading-[1.02] tracking-tight sm:text-6xl lg:text-[76px]">
             Authorization for everything after login.
           </h1>
-          <p className="mt-5 text-base text-paper/60">
-            <span className="font-medium text-paper">Duar</span> — Doorway for Users, Actions, and Resources.
-          </p>
+          
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-paper/60">
-            Keep Sign in with Google, GitHub, or Entra ID exactly as it is.{" "}
+            Works with existing IdPs like Google, GitHub, or Entra ID.{" "}
             <span className="font-medium text-paper">Duar</span> adds workspaces,
-            roles, and per-resource permissions — issued as one RS256 JWT and
-            enforced by SDKs for FastAPI, React, and Next.js. Self-hosted.
+            roles, and per-resource permissions.
+            Enforced by Duar&apos;s SDKs for FastAPI, React, and Next.js. 100% Open Source and Self-hosted.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <a href={links.gettingStarted} className={ctaOnInk}>
@@ -306,7 +300,7 @@ export default function Home() {
               Coarse to fine, without leaving the request.
             </h2>
             <p className="mt-5 leading-relaxed text-muted-foreground">
-              The workspace role rides in the JWT — no database call. RBAC
+              The workspace role rides in the JWT. RBAC
               actions and Zanzibar-style entity ACLs answer the finer questions
               from the same service, through the same dependency.
             </p>
@@ -341,7 +335,7 @@ export default function Home() {
       <section className="dot-grid border-y border-border bg-wash/60">
         <div className="mx-auto w-full max-w-6xl px-6 py-20">
           <h2 data-reveal className="max-w-2xl text-4xl font-medium tracking-tight text-ink sm:text-5xl">
-            Six things every app re-implements. Solved once.
+            Six things most app implements. Abstracted once.
           </h2>
           <ol data-reveal="stagger" className="mt-14 grid gap-x-12 gap-y-10 sm:grid-cols-2">
             {problems.map((p, i) => (
@@ -368,8 +362,8 @@ export default function Home() {
               See everything from one place.
             </h2>
             <p className="mt-5 leading-relaxed text-muted-foreground">
-              A React admin ships with the service. Every workspace, role,
-              grant, and service key is one click away — with the activity
+              An admin UI ships with the service. Every workspace, role,
+              grant, and service key is one click away, with the activity
               trail to explain how it got there.
             </p>
             <a href={links.guide("admin-panel")} className="mt-8 inline-flex items-center gap-1.5 label-mono text-[11px] text-ink">
