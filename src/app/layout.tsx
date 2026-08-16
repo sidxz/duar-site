@@ -4,19 +4,20 @@ import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import "./globals.css";
 
-const plexSans = localFont({
-  src: [
-    { path: "./fonts/ibm-plex-sans-latin-400-normal.woff2", weight: "400" },
-    { path: "./fonts/ibm-plex-sans-latin-500-normal.woff2", weight: "500" },
-    { path: "./fonts/ibm-plex-sans-latin-600-normal.woff2", weight: "600" },
-  ],
-  variable: "--font-plex-sans",
+// Schibsted Grotesk (variable, latin) for display + body; DM Mono for labels,
+// buttons, code and the hero ledger. Self-hosted, no Google Fonts at runtime.
+const sans = localFont({
+  src: [{ path: "./fonts/schibsted-grotesk-latin-wght-normal.woff2", weight: "400 600" }],
+  variable: "--font-schibsted",
   display: "swap",
 });
 
-const plexMono = localFont({
-  src: [{ path: "./fonts/ibm-plex-mono-latin-500-normal.woff2", weight: "500" }],
-  variable: "--font-plex-mono",
+const mono = localFont({
+  src: [
+    { path: "./fonts/dm-mono-latin-400-normal.woff2", weight: "400" },
+    { path: "./fonts/dm-mono-latin-500-normal.woff2", weight: "500" },
+  ],
+  variable: "--font-dm-mono",
   display: "swap",
 });
 
@@ -37,7 +38,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${plexSans.variable} ${plexMono.variable}`}>
+    <html lang="en" className={`${sans.variable} ${mono.variable}`}>
       <body className="min-h-screen bg-background font-sans text-foreground antialiased">
         <Navbar />
         <main>{children}</main>

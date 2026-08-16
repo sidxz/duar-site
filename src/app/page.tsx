@@ -1,5 +1,5 @@
 import { ArrowRight, ArrowUpRight, Check } from "lucide-react";
-import { ctaPrimary, ctaOutline } from "@/lib/cta";
+import { ctaPrimary, ctaOutline, ctaOnInk, ctaOutlineOnInk } from "@/lib/cta";
 import { links } from "@/lib/links";
 import { asset } from "@/lib/asset";
 import { TokenFlow } from "@/components/marketing/token-flow";
@@ -7,6 +7,8 @@ import { IdpDemo, WorkspaceDemo, TiersDemo, ServiceDemo } from "@/components/mar
 import { TierStack } from "@/components/marketing/tier-stack";
 import { CodeCard, type CodeLine } from "@/components/marketing/code-card";
 import { Topology } from "@/components/marketing/topology";
+import { HeroBackdrop } from "@/components/marketing/hero-backdrop";
+import { Reveal } from "@/components/marketing/reveal";
 
 const steps = [
   {
@@ -221,56 +223,65 @@ const stack = [
 export default function Home() {
   return (
     <div className="flex flex-col">
-      {/* Hero */}
-      <section className="mx-auto w-full max-w-6xl px-6 pt-20 pb-12">
-        <h1 className="max-w-3xl text-5xl font-medium leading-[1.02] tracking-tight text-ink sm:text-6xl lg:text-[76px]">
-          Authorization for everything after login.
-        </h1>
-        <p className="mt-5 text-base text-muted-foreground">
-          <span className="font-medium text-ink">Duar</span> — Doorway for Users, Actions, and Resources.
-        </p>
-        <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-          Keep Sign in with Google, GitHub, or Entra ID exactly as it is.{" "}
-          <span className="font-medium text-ink">Duar</span> adds workspaces,
-          roles, and per-resource permissions — issued as one RS256 JWT and
-          enforced by SDKs for FastAPI, React, and Next.js. Self-hosted.
-        </p>
-        <div className="mt-8 flex flex-wrap gap-3">
-          <a href={links.gettingStarted} className={ctaPrimary}>
-            Get started
-          </a>
-          <a href={links.github} target="_blank" rel="noopener noreferrer" className={ctaOutline}>
-            View on GitHub
-            <ArrowUpRight className="h-4 w-4" />
-          </a>
-        </div>
-        <div className="mt-14 grid items-center gap-12 lg:grid-cols-[1.1fr_1fr]">
-          <TokenFlow className="mx-auto h-auto w-full max-w-md lg:max-w-none" />
-          <ol className="flex flex-col gap-9">
-            {steps.map((s) => (
-              <li key={s.n} className="flex gap-5">
-                <span className="label-mono shrink-0 pt-1.5 text-[11px] text-muted-foreground">{s.n}</span>
-                <div>
-                  <p className="text-xl font-medium text-ink">{s.title}</p>
-                  <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{s.desc}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
+      <Reveal />
+      {/* Hero — the one dark region: ink ground, crimson glow, paper type. Everything after it is paper.
+          Pulled up under the 66px sticky navbar so the nav's translucent ink has the glow behind it. */}
+      <div className="relative isolate -mt-[66px] overflow-hidden bg-ink pt-[66px] text-paper">
+        <HeroBackdrop />
+        <section className="mx-auto w-full max-w-6xl px-6 pt-16 pb-16">
+          <span className="inline-flex h-7 items-center gap-2 rounded-full border border-paper/15 px-3 label-mono text-[10px] text-paper/60">
+            <span className="h-1.5 w-1.5 rounded-full bg-brand shadow-[0_0_10px_var(--color-brand)]" />
+            Beta · self-hosted · MIT
+          </span>
+          <h1 className="mt-6 max-w-3xl text-5xl font-medium leading-[1.02] tracking-tight sm:text-6xl lg:text-[76px]">
+            Authorization for everything after login.
+          </h1>
+          <p className="mt-5 text-base text-paper/60">
+            <span className="font-medium text-paper">Duar</span> — Doorway for Users, Actions, and Resources.
+          </p>
+          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-paper/60">
+            Keep Sign in with Google, GitHub, or Entra ID exactly as it is.{" "}
+            <span className="font-medium text-paper">Duar</span> adds workspaces,
+            roles, and per-resource permissions — issued as one RS256 JWT and
+            enforced by SDKs for FastAPI, React, and Next.js. Self-hosted.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <a href={links.gettingStarted} className={ctaOnInk}>
+              Get started
+            </a>
+            <a href={links.github} target="_blank" rel="noopener noreferrer" className={ctaOutlineOnInk}>
+              View on GitHub
+              <ArrowUpRight className="h-4 w-4" />
+            </a>
+          </div>
+          <div className="mt-14 grid items-center gap-12 lg:grid-cols-[1.1fr_1fr]">
+            <TokenFlow className="mx-auto h-auto w-full max-w-md lg:max-w-none" />
+            <ol className="flex flex-col gap-9">
+              {steps.map((s) => (
+                <li key={s.n} className="flex gap-5">
+                  <span className="label-mono shrink-0 pt-1.5 text-[11px] text-paper/50">{s.n}</span>
+                  <div>
+                    <p className="text-xl font-medium">{s.title}</p>
+                    <p className="mt-1.5 text-sm leading-relaxed text-paper/60">{s.desc}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+      </div>
 
       {/* Capabilities */}
       <section id="features" className="mx-auto w-full max-w-6xl scroll-mt-20 px-6 py-16">
-        <h2 className="max-w-2xl text-4xl font-medium tracking-tight text-ink sm:text-5xl">
+        <h2 data-reveal className="max-w-2xl text-4xl font-medium tracking-tight text-ink sm:text-5xl">
           Control who can do what.
         </h2>
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div data-reveal="stagger" className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {capabilities.map((c) => (
             <a
               key={c.title}
               href={c.href}
-              className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-paper transition-shadow hover:shadow-[0_12px_40px_rgba(11,11,13,0.09)]"
+              className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-paper transition-[box-shadow,transform] hover:-translate-y-0.5 hover:shadow-[0_12px_40px_rgba(11,11,13,0.09)]"
             >
               <div className="bg-brand-wash px-7 pt-8">{c.demo}</div>
               <div className="p-7">
@@ -290,7 +301,7 @@ export default function Home() {
       <section className="mx-auto w-full max-w-6xl px-6 py-20">
         <div className="grid gap-12 lg:grid-cols-[1.05fr_1fr] lg:items-center">
           <TierStack className="mx-auto h-auto w-full max-w-md lg:max-w-none" />
-          <div className="min-w-0">
+          <div data-reveal className="min-w-0">
             <h2 className="text-4xl font-medium tracking-tight text-ink sm:text-5xl">
               Coarse to fine, without leaving the request.
             </h2>
@@ -306,10 +317,10 @@ export default function Home() {
 
       {/* SDKs */}
       <section className="mx-auto w-full max-w-6xl px-6 py-16">
-        <h2 className="max-w-2xl text-4xl font-medium tracking-tight text-ink sm:text-5xl">
+        <h2 data-reveal className="max-w-2xl text-4xl font-medium tracking-tight text-ink sm:text-5xl">
           Three lines to a protected route.
         </h2>
-        <div className="mt-12 grid gap-5 lg:grid-cols-3">
+        <div data-reveal="stagger" className="mt-12 grid gap-5 lg:grid-cols-3">
           {sdkCards.map((c) => (
             <CodeCard key={c.title} title={c.title} install={c.install} lines={c.lines} />
           ))}
@@ -327,12 +338,12 @@ export default function Home() {
       </section>
 
       {/* Problems */}
-      <section className="border-y border-border bg-wash/60">
+      <section className="dot-grid border-y border-border bg-wash/60">
         <div className="mx-auto w-full max-w-6xl px-6 py-20">
-          <h2 className="max-w-2xl text-4xl font-medium tracking-tight text-ink sm:text-5xl">
+          <h2 data-reveal className="max-w-2xl text-4xl font-medium tracking-tight text-ink sm:text-5xl">
             Six things every app re-implements. Solved once.
           </h2>
-          <ol className="mt-14 grid gap-x-12 gap-y-10 sm:grid-cols-2">
+          <ol data-reveal="stagger" className="mt-14 grid gap-x-12 gap-y-10 sm:grid-cols-2">
             {problems.map((p, i) => (
               <li key={p.title} className="flex gap-5">
                 <span className="label-mono shrink-0 text-[11px] text-muted-foreground">
@@ -351,7 +362,7 @@ export default function Home() {
 
       {/* Admin panel */}
       <section className="mx-auto w-full max-w-6xl px-6 py-20">
-        <div className="grid gap-12 lg:grid-cols-[1.2fr_1fr] lg:items-start">
+        <div data-reveal className="grid gap-12 lg:grid-cols-[1.2fr_1fr] lg:items-start">
           <div>
             <h2 className="text-4xl font-medium tracking-tight text-ink sm:text-5xl">
               See everything from one place.
@@ -379,7 +390,7 @@ export default function Home() {
 
       {/* Security */}
       <section className="mx-auto w-full max-w-6xl px-6 pb-20">
-        <div className="rounded-2xl border border-border bg-paper p-8 sm:p-12">
+        <div data-reveal className="rounded-2xl border border-border bg-paper p-8 sm:p-12">
           <h2 className="max-w-2xl text-3xl font-medium tracking-tight text-ink sm:text-4xl">
             Boring where it counts.
           </h2>
@@ -400,7 +411,7 @@ export default function Home() {
 
       {/* Under the hood */}
       <section className="mx-auto w-full max-w-6xl px-6 py-20">
-        <div className="grid gap-12 lg:grid-cols-[1.05fr_1fr] lg:items-center">
+        <div data-reveal className="grid gap-12 lg:grid-cols-[1.05fr_1fr] lg:items-center">
           <div>
             <h2 className="text-4xl font-medium tracking-tight text-ink sm:text-5xl">
               Built on proven infrastructure.
@@ -439,7 +450,7 @@ export default function Home() {
 
       {/* CTA */}
       <section className="mx-auto w-full max-w-6xl px-6 pb-24">
-        <div className="rounded-2xl bg-brand p-[1.5px]">
+        <div data-reveal className="rounded-2xl bg-brand p-[1.5px]">
           <div className="flex flex-col items-start gap-8 rounded-[15px] bg-paper px-8 py-14 sm:px-14 md:flex-row md:items-center md:justify-between">
             <div>
               <h2 className="max-w-md text-3xl font-medium tracking-tight text-ink sm:text-4xl">

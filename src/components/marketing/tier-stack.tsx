@@ -13,7 +13,7 @@ const DURATION = 700; // ms per plate
 const STAGGER = 60; // ms between plates
 const COLLAPSE = [130, 0, -130]; // px translateY: exploded → stacked pile
 const INK = "#0b0b0d";
-const MONO = "var(--font-plex-mono), monospace";
+const MONO = "var(--font-dm-mono), monospace";
 
 const plates = [
   { y: 40, title: "WORKSPACE ROLES", sub: "JWT CLAIMS · NO DB CALL", chip: "role: editor", w: 108 },

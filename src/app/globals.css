@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 @theme inline {
-  --font-sans: var(--font-plex-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-plex-mono), ui-monospace, SFMono-Regular, monospace;
+  --font-sans: var(--font-schibsted), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-dm-mono), ui-monospace, SFMono-Regular, monospace;
 
   /* Monochrome base — same values as docustore-site */
   --color-ink: #0b0b0d;
@@ -19,12 +19,34 @@
   --color-brand-dark: #c42020;
   --color-brand-tint: #ffd1d1;
   --color-brand-wash: #fff1f1;
+  --color-brand-deep: #7a0f1f; /* hero glow only */
 
   --radius-sm: 2px;
   --radius-md: 4px;
   --radius-lg: 6px;
   --radius-xl: 12px;
   --radius-2xl: 16px;
+
+  /* Hero claims ledger — one column of the token's claims scrolls up forever. */
+  --animate-ledger: ledger-up 70s linear infinite;
+  @keyframes ledger-up {
+    to {
+      transform: translateY(-50%);
+    }
+  }
+  /* Hero glow — two crimson blobs drifting on the ink ground (hero-backdrop.tsx). */
+  --animate-glow-a: glow-a 22s ease-in-out infinite alternate;
+  --animate-glow-b: glow-b 28s ease-in-out infinite alternate-reverse;
+  @keyframes glow-a {
+    to {
+      transform: translate(-70px, 50px) scale(1.06);
+    }
+  }
+  @keyframes glow-b {
+    to {
+      transform: translate(60px, -40px);
+    }
+  }
 }
 
 @layer base {
@@ -41,9 +63,41 @@
 
 @layer utilities {
   .label-mono {
-    font-family: var(--font-plex-mono), ui-monospace, monospace;
+    font-family: var(--font-dm-mono), ui-monospace, monospace;
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.12em;
+  }
+  /* hero-backdrop.tsx: fade the ledger columns out before the hero steps (y) and toward the headline (x) */
+  .ledger-fade-y {
+    mask-image: linear-gradient(180deg, transparent, #000 12%, #000 70%, transparent);
+  }
+  .ledger-fade-x {
+    mask-image: linear-gradient(90deg, transparent, #000 40%);
+  }
+  /* hero-backdrop.tsx: hairline grid on ink, fading out from the top-right */
+  .ink-grid {
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(90% 80% at 60% 0%, #000 20%, transparent 75%);
+  }
+  /* faint dot grid for wash bands */
+  .dot-grid {
+    background-image: radial-gradient(rgba(11, 11, 13, 0.13) 1px, transparent 1.2px);
+    background-size: 24px 24px;
+  }
+  /* reveal.tsx adds .reveal below the fold, then .is-in on entry */
+  .reveal {
+    opacity: 0;
+    transform: translateY(10px);
+    transition:
+      opacity 0.38s ease-out,
+      transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal.is-in {
+    opacity: 1;
+    transform: none;
   }
 }

@@ -1,10 +1,12 @@
 /* Hero graphic — the AuthZ-mode handshake. Your IdP issues an id_token; the
    app hands it to Duar, which verifies it against the IdP's JWKS and mints
    one RS256 authz JWT carrying workspace + role claims; the SDK enforces that
-   JWT in your app. Static, server-rendered. Brand red marks the shield and the
-   minted-token edge only. */
-const INK = "#0b0b0d";
-const MONO = "var(--font-plex-mono), monospace";
+   JWT in your app. Static, server-rendered, drawn in paper on the ink hero.
+   Brand red marks the shield and the minted-token edge only. */
+const INK = "var(--color-paper)"; // line + text colour (the hero ground is ink)
+const FILL = "var(--color-ink)"; // card fills
+const CHIP = "rgba(255,255,255,0.08)"; // "your app" chip
+const MONO = "var(--font-dm-mono), monospace";
 
 const idps = [
   { y: 68, label: "Google" },
@@ -47,7 +49,7 @@ export function TokenFlow({ className }: { className?: string }) {
             strokeOpacity="0.25"
             strokeWidth="1"
           />
-          <rect x="16" y={p.y} width="112" height="30" rx="4" fill="#ffffff" stroke={INK} strokeWidth="1" />
+          <rect x="16" y={p.y} width="112" height="30" rx="4" fill={FILL} stroke={INK} strokeWidth="1" />
           <text x="30" y={p.y + 19} fontFamily={MONO} fontSize="10.5" fill={INK}>
             {p.label}
           </text>
@@ -60,7 +62,7 @@ export function TokenFlow({ className }: { className?: string }) {
       {/* Duar — shield with keyhole (brand) */}
       <path
         d="M240 96 L274 109 V146 C274 169 258 184 240 192 C222 184 206 169 206 146 V109 Z"
-        fill="#ffffff"
+        fill={FILL}
         stroke="var(--color-brand)"
         strokeWidth="1.6"
         strokeLinejoin="round"
@@ -78,7 +80,7 @@ export function TokenFlow({ className }: { className?: string }) {
       </text>
 
       {/* JWT card */}
-      <rect x="336" y="78" width="168" height="130" rx="6" fill="#ffffff" stroke={INK} strokeWidth="1.2" />
+      <rect x="336" y="78" width="168" height="130" rx="6" fill={FILL} stroke={INK} strokeWidth="1.2" />
       <path d="M336 100 H504" stroke={INK} strokeOpacity="0.15" />
       <text x="348" y="93" fontFamily={MONO} fontSize="9" letterSpacing="0.1em" fill={INK} opacity="0.55">
         RS256 · KID 2026-08
@@ -92,7 +94,7 @@ export function TokenFlow({ className }: { className?: string }) {
 
       {/* → your app */}
       <path d="M420 208 V232" fill="none" stroke={INK} strokeOpacity="0.35" strokeWidth="1" markerEnd="url(#tf-arw)" />
-      <rect x="356" y="238" width="128" height="32" rx="4" fill="var(--color-wash)" stroke={INK} strokeWidth="1" />
+      <rect x="356" y="238" width="128" height="32" rx="4" fill={CHIP} stroke={INK} strokeWidth="1" />
       <text x="420" y="258" textAnchor="middle" fontFamily={MONO} fontSize="10.5" fill={INK}>
         your app · SDK
       </text>

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Logo } from "@/components/layout/logo";
-import { ctaOnBrandSm } from "@/lib/cta";
+import { ctaOnInkSm } from "@/lib/cta";
 import { links } from "@/lib/links";
 
 function GithubIcon({ className }: { className?: string }) {
@@ -17,7 +17,9 @@ const navLink =
 
 export function Navbar() {
   return (
-    <header className="sticky top-0 z-50 bg-brand text-paper">
+    <header className="sticky top-0 z-50 border-b border-paper/10 bg-ink/85 text-paper backdrop-blur-md">
+      {/* the one line of red at the top of the page */}
+      <div aria-hidden="true" className="h-0.5 bg-[linear-gradient(90deg,var(--color-brand),rgba(244,55,55,0.35)_45%,transparent_80%)]" />
       <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-6">
         <Link href="/" aria-label="Duar home">
           <Logo inverted />
@@ -44,7 +46,7 @@ export function Navbar() {
           >
             <GithubIcon className="h-[18px] w-[18px]" />
           </a>
-          <a href={links.gettingStarted} className={ctaOnBrandSm}>
+          <a href={links.gettingStarted} className={ctaOnInkSm}>
             Get started
           </a>
         </nav>
